@@ -1,12 +1,17 @@
 .game-container {
-  max-width: 600px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 25px;
   padding-bottom: 70px;
-  background-color: #2a2a2a;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* background-color: #2a2a2a; */
+  /* border-radius: 10px; */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .logo-container {
@@ -21,22 +26,49 @@
   width: auto;
 }
 
+.card-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #232323;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.22);
+  padding: 40px 36px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .setup-container {
   display: flex;
   flex-direction: column;
   gap: 25px;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.input-group.checkbox-group {
-  flex-direction: row;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
   align-items: center;
-  gap: 12px;
+}
+
+.input-group,
+.input-group.checkbox-group {
+  width: 100%;
+  max-width: 350px;
+  align-items: center;
+}
+
+input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  max-width: 350px;
+  box-sizing: border-box;
 }
 
 label {
@@ -102,19 +134,26 @@ button:hover {
   font-weight: bold;
 }
 
+@media (max-width: 800px) {
+  .game-container {
+    max-width: 98vw;
+  }
+  .card-container {
+    max-width: 98vw;
+    padding: 18px 6px 16px 6px;
+  }
+}
+
 @media (max-width: 480px) {
   .game-container {
     padding: 20px;
     padding-bottom: 60px;
     margin: 10px;
+    max-width: calc(100% - 20px);
   }
 
   .game-logo {
     max-height: 180px;
-  }
-
-  .setup-container {
-    gap: 20px;
   }
 
   .input-group {

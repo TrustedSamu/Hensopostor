@@ -77,36 +77,38 @@ const Game: React.FC = () => {
   if (!gameState.gameStarted) {
     return (
       <div className="game-container">
-        <div className="logo-container">
-          <img src="/42cf0d5c-291e-4e0e-940a-c572ccf80471.png" alt="HensoPostor Logo" className="game-logo" />
-        </div>
-        <div className="setup-container">
-          <div className="input-group">
-            <label htmlFor="playerCount">Anzahl der Spieler:</label>
-            <input
-              type="number"
-              id="playerCount"
-              min="3"
-              max="10"
-              defaultValue="3"
-            />
+        <div className="card-container">
+          <div className="logo-container">
+            <img src="/42cf0d5c-291e-4e0e-940a-c572ccf80471.png" alt="HensoPostor Logo" className="game-logo" />
           </div>
-          <div className="input-group checkbox-group">
-            <input
-              type="checkbox"
-              id="freakMode"
-            />
-            <label htmlFor="freakMode">Freak Mode</label>
+          <div className="setup-container">
+            <div className="input-group">
+              <label htmlFor="playerCount">Anzahl der Spieler:</label>
+              <input
+                type="number"
+                id="playerCount"
+                min="3"
+                max="10"
+                defaultValue="3"
+              />
+            </div>
+            <div className="input-group checkbox-group">
+              <input
+                type="checkbox"
+                id="freakMode"
+              />
+              <label htmlFor="freakMode">Freak Mode</label>
+            </div>
+            <button
+              onClick={() => {
+                const playerCount = parseInt((document.getElementById('playerCount') as HTMLInputElement).value);
+                const freakMode = (document.getElementById('freakMode') as HTMLInputElement).checked;
+                startGame(playerCount, freakMode);
+              }}
+            >
+              Spiel starten
+            </button>
           </div>
-          <button
-            onClick={() => {
-              const playerCount = parseInt((document.getElementById('playerCount') as HTMLInputElement).value);
-              const freakMode = (document.getElementById('freakMode') as HTMLInputElement).checked;
-              startGame(playerCount, freakMode);
-            }}
-          >
-            Spiel starten
-          </button>
         </div>
         <HostedBy />
       </div>
