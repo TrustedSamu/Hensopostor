@@ -24,6 +24,8 @@ const Game: React.FC = () => {
     gameStarted: false
   });
 
+  const [impostorCount, setImpostorCount] = useState(1);
+
   const startGame = (playerCount: number, freakMode: boolean) => {
     if (playerCount < 3) {
       alert('Mindestens 3 Spieler erforderlich!');
@@ -38,9 +40,14 @@ const Game: React.FC = () => {
     const hint = words[randomCategory].hint;
 
     // Bestimme Anzahl der Imposter
-    const impostorCount = freakMode ? Math.floor(Math.random() * 2) + 1 : 1;
+    let impostorCountValue = 1;
+    if (freakMode) {
+      impostorCountValue = Math.floor(Math.random() * 2) + 1;
+    } else {
+      impostorCountValue = impostorCount;
+    }
     const impostors: number[] = [];
-    for (let i = 0; i < impostorCount; i++) {
+    for (let i = 0; i < impostorCountValue; i++) {
       let impostor: number;
       do {
         impostor = Math.floor(Math.random() * playerCount) + 1;
@@ -77,10 +84,10 @@ const Game: React.FC = () => {
   if (!gameState.gameStarted) {
     return (
       <div className="game-container">
+        <div className="logo-static">
+          <img src="/42cf0d5c-291e-4e0e-940a-c572ccf80471.png" alt="HensoPostor Logo" />
+        </div>
         <div className="card-container">
-          <div className="logo-container">
-            <img src="/42cf0d5c-291e-4e0e-940a-c572ccf80471.png" alt="HensoPostor Logo" className="game-logo" />
-          </div>
           <div className="setup-container">
             <div className="input-group">
               <label htmlFor="playerCount">Anzahl der Spieler:</label>
@@ -92,7 +99,19 @@ const Game: React.FC = () => {
                 defaultValue="3"
               />
             </div>
+            <div className="input-group">
+              <label htmlFor="impostorCount">Anzahl der Impostors:</label>
+              <input
+                type="number"
+                id="impostorCount"
+                min="1"
+                max="3"
+                value={impostorCount}
+                onChange={e => setImpostorCount(Number(e.target.value))}
+              />
+            </div>
             <div className="input-group checkbox-group">
+              <span className="freak-icon" role="img" aria-label="Freak Mode">⚡</span>
               <input
                 type="checkbox"
                 id="freakMode"
@@ -103,6 +122,8 @@ const Game: React.FC = () => {
               onClick={() => {
                 const playerCount = parseInt((document.getElementById('playerCount') as HTMLInputElement).value);
                 const freakMode = (document.getElementById('freakMode') as HTMLInputElement).checked;
+                const impostorCountInput = parseInt((document.getElementById('impostorCount') as HTMLInputElement).value);
+                setImpostorCount(impostorCountInput);
                 startGame(playerCount, freakMode);
               }}
             >
@@ -119,33 +140,35 @@ const Game: React.FC = () => {
 
   return (
     <div className="game-container">
-      <div className="logo-container">
-        <img src="/42cf0d5c-291e-4e0e-940a-c572ccf80471.png" alt="HensoPostor Logo" className="game-logo" />
+      <div className="logo-static">
+        <img src="/42cf0d5c-291e-4e0e-940a-c572ccf80471.png" alt="HensoPostor Logo" />
       </div>
-      <div className="game-info">
-        <h2>Spieler {gameState.currentPlayer} von {gameState.totalPlayers}</h2>
-        <div className="role-display">
-          <h3>Deine Rolle:</h3>
-          <p className={isImpostor ? 'impostor' : 'player'}>
-            {isImpostor ? 'Impostor' : 'Spieler'}
-          </p>
+      <div className="card-container">
+        <div className="game-info">
+          <h2>Spieler {gameState.currentPlayer} von {gameState.totalPlayers}</h2>
+          <div className="role-display">
+            <h3>Deine Rolle:</h3>
+            <p className={isImpostor ? 'impostor' : 'player'}>
+              {isImpostor ? 'Impostor' : 'Spieler'}
+            </p>
+          </div>
+          {!isImpostor && (
+            <div className="word-display">
+              <h3>Dein Wort:</h3>
+              <p>{gameState.currentWord}</p>
+            </div>
+          )}
+          {isImpostor && gameState.isFreakMode && (
+            <div className="hint-display">
+              <h3>Hinweis:</h3>
+              <p>{gameState.currentHint}</p>
+            </div>
+          )}
         </div>
-        {!isImpostor && (
-          <div className="word-display">
-            <h3>Dein Wort:</h3>
-            <p>{gameState.currentWord}</p>
-          </div>
-        )}
-        {isImpostor && gameState.isFreakMode && (
-          <div className="hint-display">
-            <h3>Hinweis:</h3>
-            <p>{gameState.currentHint}</p>
-          </div>
-        )}
+        <button onClick={nextPlayer}>
+          {gameState.currentPlayer < gameState.totalPlayers ? 'Nächster Spieler' : 'Spiel beenden'}
+        </button>
       </div>
-      <button onClick={nextPlayer}>
-        {gameState.currentPlayer < gameState.totalPlayers ? 'Nächster Spieler' : 'Spiel beenden'}
-      </button>
       <HostedBy />
     </div>
   );

@@ -33,7 +33,7 @@
   background: #232323;
   border-radius: 18px;
   box-shadow: 0 6px 24px rgba(0,0,0,0.22);
-  padding: 40px 36px 36px 36px;
+  padding: 10px 12px 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,14 +134,137 @@ button:hover {
   font-weight: bold;
 }
 
+.logo-static {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.logo-static img {
+  max-width: 220px;
+  width: 60vw;
+  height: auto;
+}
+
+.input-group.checkbox-group {
+  background: linear-gradient(90deg, #ffeaea 0%, #ffe3fc 100%);
+  border: 2px solid #ff4f8b;
+  border-radius: 22px;
+  padding: 16px 22px 14px 18px;
+  margin: 0 0 18px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 0 16px 2px rgba(255,79,139,0.13), 0 4px 16px rgba(255,107,107,0.10);
+  transition: box-shadow 0.2s, border 0.2s, background 0.2s;
+  position: relative;
+}
+.input-group.checkbox-group:hover {
+  box-shadow: 0 0 32px 6px rgba(255,79,139,0.18), 0 8px 24px rgba(255,107,107,0.13);
+  background: linear-gradient(90deg, #ffe3fc 0%, #ffeaea 100%);
+  border-color: #ff6b6b;
+}
+.input-group.checkbox-group input[type="checkbox"] {
+  accent-color: #ff4f8b;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(255,107,107,0.10);
+  border-radius: 6px;
+  transition: box-shadow 0.2s;
+  display: inline-block;
+  vertical-align: middle;
+}
+.input-group.checkbox-group .freak-icon {
+  font-size: 1.6em;
+  margin: 0 6px 0 0;
+  color: #ff4f8b;
+  filter: drop-shadow(0 1px 2px #fff2);
+  vertical-align: middle;
+}
+.input-group.checkbox-group label {
+  color: #ff4f8b;
+  font-weight: 700;
+  font-size: 1.13em;
+  letter-spacing: 0.02em;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.2s;
+  vertical-align: middle;
+}
+
 @media (max-width: 800px) {
   .game-container {
     max-width: 98vw;
   }
   .card-container {
-    max-width: 98vw;
-    padding: 18px 6px 16px 6px;
-    margin-bottom: 200px;
+    max-width: 85vw;
+    width: 100%;
+    padding: 20px 6vw 10px 0vw;
+    margin: 0 8vw 80px auto;
+    border-radius: 12px;
+  }
+  .setup-container {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    align-items: stretch;
+  }
+  .input-group {
+    max-width: 85vw;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .input-group.checkbox-group {
+    max-width: 70vw;
+    width: 100%;
+    padding: 18px 8vw 16px 10vw;
+    gap: 18px;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+  }
+  .input-group.checkbox-group .freak-icon {
+    font-size: 2em;
+  }
+  .input-group.checkbox-group label {
+    font-size: 1.22em;
+  }
+  .input-group.checkbox-group input[type="checkbox"] {
+    width: 32px;
+    height: 32px;
+  }
+  .input-group,
+  .input-group.checkbox-group {
+    margin-bottom: 22px;
+  }
+  .game-info {
+    max-width: 95vw;
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  .word-display p {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  button {
+    max-width: 100%;
+    width: 100%;
+  }
+  .logo-static {
+    margin-right: 8vw;
+    margin-left: 0;
+  }
+  .logo-static img {
+    max-width: 160px;
+    width: 80vw;
   }
 }
 
